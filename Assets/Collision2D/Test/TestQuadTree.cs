@@ -99,6 +99,7 @@ namespace Lockstep.Collision2D {
             switch (type) {
                 case EShape2D.Circle: {
                     var colInfo = (CCircle) prefab.collider;
+                    //修改localScale
                     obj.transform.localScale =
                         new Vector3(colInfo.radius.ToFloat() * 2, 1, colInfo.radius.ToFloat() * 2);
                     break;
@@ -118,8 +119,9 @@ namespace Lockstep.Collision2D {
             }
 
             var proxy = new ColliderProxy();
+            //构建了碰撞范围
             proxy.Init(prefab, obj.transform.position.ToLVector2XZ());
-            proxy.UnityTransform = obj.transform;
+            // proxy.UnityTransform = obj.transform;
             var mono = obj.gameObject.AddComponent<ColliderProxyMono>();
             mono.proxy = proxy;
             if (!isStatic) {

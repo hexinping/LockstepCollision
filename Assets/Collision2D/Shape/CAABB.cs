@@ -10,7 +10,7 @@ namespace Lockstep.Collision2D {
 
         public CAABB(LVector2 size){
             this.size = size;
-            radius = size.magnitude;
+            radius = size.magnitude; //半径
         }
     }
 }

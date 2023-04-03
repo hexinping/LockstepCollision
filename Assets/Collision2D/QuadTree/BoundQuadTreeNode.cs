@@ -92,18 +92,19 @@ namespace Lockstep.Collision2D {
         /// </summary>
         /// <param name="obj">Object to add.</param>
         /// <param name="objBounds">3D bounding box around the object.</param>
-        /// <returns>True if the object fits entirely within this node.</returns>
+        /// <returns>True if the object fits entirely within this node. 如果对象完全适合此节点，则为真</returns>
         public bool Add(ColliderProxy obj, LRect objBounds){
+            //首先判断当前目标对象包围盒是否在当前节点区域范围，不在的话直接返回false
             if (!Encapsulates(bounds, objBounds)) {
                 return false;
             }
-
+            //在判断当前目标对象包围盒是否在子节点区域范围
             SubAdd(obj, objBounds);
             return true;
         }
 
         /// <summary>
-        /// Remove an object. Makes the assumption that the object only exists once in the tree.
+        /// Remove an object. Makes the assumption that the object only exists once in the tree. 删除一个对象。假设对象在树中只存在一次。
         /// </summary>
         /// <param name="obj">Object to remove.</param>
         /// <returns>True if the object was removed successfully.</returns>
@@ -385,7 +386,7 @@ namespace Lockstep.Collision2D {
         }
 
         /// <summary>
-        /// Find which child node this object would be most likely to fit in.
+        /// Find which child node this object would be most likely to fit in. 查找该对象最有可能适合的子节点
         /// </summary>
         /// <param name="objBounds">The object's bounds.</param>
         /// <returns>One of the eight child octants.</returns>
@@ -460,7 +461,7 @@ namespace Lockstep.Collision2D {
             return new LRect(center - size / 2, size);
         }
 
-
+        //碰撞对象和碰撞包围子子节点区域的映射
         public static Dictionary<ColliderProxy, BoundsQuadTreeNode> obj2Node =
             new Dictionary<ColliderProxy, BoundsQuadTreeNode>();
 
@@ -475,6 +476,7 @@ namespace Lockstep.Collision2D {
             // We always put things in the deepest possible child
             // So we can skip some checks if there are children aleady
             if (!HasChildren) {
+                //没有子区域节点就先创建子节点
                 // Just add if few objects are here, or children would be below min size
                 if (objects.Count < NUM_OBJECTS_ALLOWED || (BaseLength / 2) < minSize) {
                     OctreeObject newObj = new OctreeObject {Obj = obj, Bounds = objBounds};
@@ -512,14 +514,18 @@ namespace Lockstep.Collision2D {
                     }
                 }
             }
-
+            
             // Handle the new object we're adding now
+            // 有子节点就找到合适的子节点区域，如果判断包含目标对象的包围盒，就继续往下查找
             int bestFit = BestFitChild(objBounds.center);
             if (Encapsulates(children[bestFit].bounds, objBounds)) {
+                //如果当前节点的子区域包含目标对象的包围盒，就继续向下找
+                //调用子节点SubAdd的方法，依次向下找到合适的区域
                 children[bestFit].SubAdd(obj, objBounds);
             }
             else {
-                // Didn't fit in a child. We'll have to it to this node instead
+                // 如果当前节点的子区域都没有最合适的（可能目标对象的包围盒会和多个子节点区域接触），就直接挂在当前节点区域上
+                // Didn't fit in a child. We'll have to it to this node instead 不适合孩子区域。我们必须把它转到这个节点
                 OctreeObject newObj = new OctreeObject {Obj = obj, Bounds = objBounds};
                 objects.Add(newObj);
                 obj2Node[obj] = this;
@@ -607,7 +613,7 @@ namespace Lockstep.Collision2D {
         }
 
         /// <summary>
-        /// Checks if outerBounds encapsulates innerBounds.
+        /// Checks if outerBounds encapsulates innerBounds. 检查 outerBounds 是否包含了 innerBounds
         /// </summary>
         /// <param name="outerBounds">Outer bounds.</param>
         /// <param name="innerBounds">Inner bounds.</param>

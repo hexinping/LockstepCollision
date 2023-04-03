@@ -6,12 +6,14 @@ namespace Lockstep.Collision2D {
     public class ColliderProxyMono : MonoBehaviour {
         public ColliderProxy proxy;
 
+        //上一帧位置
         public Vector2 prePos;
+        //上一帧旋转角度
         public float preDeg;
         public bool hasInit = false;
 
         private Material mat;
-        private bool hasCollided = false;
+        private bool hasCollided = false;  //是否发生碰撞
         public Color rawColor = Color.yellow;
         private Renderer render;
         private Material rawmat;

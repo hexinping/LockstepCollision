@@ -9,7 +9,7 @@ namespace Lockstep.Collision2D {
         public CCircle() : this(LFloat.zero){ }
 
         public CCircle(LFloat radius){
-            this.radius = radius;
+            this.radius = radius; //半径
         }
     }
 }

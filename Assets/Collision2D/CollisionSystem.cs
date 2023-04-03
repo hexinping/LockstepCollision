@@ -43,6 +43,7 @@ namespace Lockstep.Collision2D {
 
             // Initial size (metres), initial centre position, minimum node size (metres), looseness
             foreach (var type in allTypes) {
+                //构建四叉树
                 var boundsTree = new BoundsQuadTree(worldSize, pos, minNodeSize, loosenessval);
                 boundsTrees.Add(boundsTree);
             }
@@ -110,12 +111,13 @@ namespace Lockstep.Collision2D {
             return colFab;
         }
         
+        //主碰撞系统的检测
         //public List<>
         public void DoUpdate(){
             tempLst.Clear();
             //deal layer
             foreach (var pair in BoundsQuadTreeNode.obj2Node) {
-                var val = pair.Key;
+                var val = pair.Key;  //ColliderProxy类型
                 if (!val.IsStatic && val._isMoved) {
                     val._isMoved = false;
                     tempLst.Add(val);
@@ -133,6 +135,7 @@ namespace Lockstep.Collision2D {
                 val._isMoved = false;
                 var bound = val.GetBounds();
                 var boundsTree = GetBoundTree(val.LayerType);
+                //因为物体会移动，所以需要更新移动物体所属的四叉树节点区域
                 boundsTree.UpdateObj(val, bound);
             }
 
@@ -180,6 +183,7 @@ namespace Lockstep.Collision2D {
         bool NeedCheck(ColliderProxy a, ColliderProxy b){
             var val = _collisionMask[a.LayerType];
             var val2 = 1 << b.LayerType;
+            //掩码值不一样才去碰撞检测
             var needCheck = (val & val2) != 0;
             return needCheck;
         }

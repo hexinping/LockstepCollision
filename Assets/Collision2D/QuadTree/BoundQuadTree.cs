@@ -43,7 +43,7 @@ namespace Lockstep.Collision2D {
         // The total amount of objects currently in the tree
         public int Count { get; private set; }
 
-        // Root node of the octree
+        // Root node of the octree 根节点
         BoundsQuadTreeNode rootNode;
 
         public delegate bool FuncCheckCanCollide(ColliderProxy a, ColliderProxy b);
@@ -86,20 +86,27 @@ namespace Lockstep.Collision2D {
             initialSize = initialWorldSize;
             minSize = minNodeSize;
             looseness = LMath.Clamp(loosenessVal, 1.ToLFloat(), 2.ToLFloat());
+            //创建四叉树根节点
             rootNode = new BoundsQuadTreeNode(null, initialSize, minSize, looseness, initialWorldPos);
         }
 
+        //四叉树更新
+        //bound ==> obj 当前的包围盒区域
         public void UpdateObj(ColliderProxy obj, LRect bound){
             var node = GetNode(obj);
             if (node == null) {
+                //当前树没有该对象的节点区域，就新增一个
                 Add(obj, bound);
             }
             else {
                 if (!node.ContainBound(bound)) {
+                    //当前树之前包含过这个对象的节点区域，但是现在该区域不包含目标对象了，从该区域节点的管理对象列表里删除目标对象
                     Remove(obj);
+                    //根据目标对象的包围盒区域大小，把目标对象重新加入到对应的子节点区域，从根节点开始找合适的子节点
                     Add(obj, bound);
                 }
                 else {
+                    //当前树之前包含过这个对象的节点区域，现在该区域仍包含目标对象了，
                     node.UpdateObj(obj, bound);
                 }
             }
