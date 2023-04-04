@@ -116,6 +116,7 @@ namespace Lockstep.Collision {
             return new Sphere(c, (max - min).magnitude * LFloat.half);
         }
 
+        //AABB 和 AABB
         public override bool TestWithShape(BaseShape shape){
             return shape.TestWith(this);
         }
@@ -139,11 +140,13 @@ namespace Lockstep.Collision {
         public override bool TestWith(OBB obb){
             return Utils.TestOBBOBB(obb, this.ToOBB());
         }
-
+        
+        //AABB 和 平面
         public override bool TestWith(Plane plane){
             return Utils.TestAABBPlane(this, plane);
         }
 
+        //AABB 和 射线
         public override bool TestWith(Ray ray){
             return Utils.IntersectRayAABB(ray.o, ray.d, this, out LFloat tmin, out LVector3 temp);
         }

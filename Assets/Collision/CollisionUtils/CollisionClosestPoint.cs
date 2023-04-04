@@ -154,7 +154,7 @@ namespace Lockstep.Collision
             LFloat sqDist = LFloat.zero;
             for (int i = 0; i < 3; i++)
             {
-                // For each axis count any excess distance outside box extents
+                // For each axis count any excess distance outside box extents 对于每个轴计算任何超出框范围的距离
                 LFloat v = p[i];
                 var min = b.min[i];
                 var max = b.max[i];

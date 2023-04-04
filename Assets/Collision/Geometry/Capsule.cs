@@ -15,12 +15,12 @@ namespace Lockstep.Collision {
         }
 
         /// <summary>
-        /// Medial line segment start point
+        /// Medial line segment start point 中线段起点
         /// </summary>
         public LVector3 a => c - _hDir;
 
         /// <summary>
-        /// Medial line segment end point
+        /// Medial line segment end point 中线段终点
         /// </summary>
         public LVector3 b => c + _hDir;
 

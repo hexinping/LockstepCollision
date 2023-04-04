@@ -151,7 +151,7 @@ namespace Lockstep.Collision
             return false;
         }
 
-
+        //十五个轴投影判断 计算量太大
         public static bool TestOBBOBB(OBB a, OBB b)
         {
             LFloat ra, rb;
@@ -329,10 +329,10 @@ namespace Lockstep.Collision
         // Test if AABB b intersects plane p
         public static bool TestAABBPlane(AABB b, Plane p)
         {
-            // These two lines not necessary with a (center, extents) AABB representation
+            // These two lines not necessary with a (center, extents) AABB representation 这两条线没有必要用(中心，区段)AABB表示
             LVector3 c = (b.max + b.min) * LFloat.half; // Compute AABB center
-            LVector3 e = b.max - c; // Compute positive extents
-            // Compute the projection interval radius of b onto L(t) = b.c + t * p.n
+            LVector3 e = b.max - c; // Compute positive extents 计算正扩展
+            // Compute the projection interval radius of b onto L(t) = b.c + t * p.n 计算b在L(t)上的投影间隔半径= b.c + t * p.n
             LFloat r = e[0] * Abs(p.n[0]) + e[1] * Abs(p.n[1]) + e[2] * Abs(p.n[2]);
             // Compute distance of box center from plane
             LFloat s = Dot(p.n, c) - p.d;
@@ -343,11 +343,12 @@ namespace Lockstep.Collision
         // Returns true if sphere s intersects AABB b, false otherwise
         public static bool TestSphereAABB(Sphere s, AABB b)
         {
-            // Compute squared distance between sphere center and AABB
+            // Compute squared distance between sphere center and AABB 计算球体中心到AABB的平方距离
             LFloat sqDist = SqDistPointAABB(s.c, b);
 
             // Sphere and AABB intersect if the (squared) distance
             // between them is less than the (squared) sphere radius
+            //如果球面与AABB之间距离的平方小于球面半径的平方，则球面与AABB相交
             return sqDist <= s.r * s.r;
         }
 

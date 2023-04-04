@@ -118,6 +118,15 @@ public class TestCollision3D : MonoBehaviour {
                 _col.u = new LAxis3D(transform.right.ToLVector3(), transform.up.ToLVector3(),
                     transform.forward.ToLVector3());
                 proxy.AddCollider(_col, ColliderLocalInfo.identity);
+                
+                //AABB构造
+                // var _colAABB = new AABB();
+                // var center = (obj.transform.position).ToLVector3();
+                // var scale = (transform.localScale * 0.5f).ToLVector3().abs;
+                // _colAABB.min = center - scale.abs;
+                // _colAABB.max = center + scale.abs;
+                // proxy.AddCollider(_colAABB, ColliderLocalInfo.identity);
+                
                 break;
             }
             case PrimitiveType.Sphere: {

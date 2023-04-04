@@ -14,7 +14,7 @@ namespace Lockstep.Collision
         public override EColType ColType{get { return EColType.Plane;}}
         
         /// <summary>
-        /// Plane normal. Points x on the plane satisfy Dot(n,x) = d
+        /// Plane normal. Points x on the plane satisfy Dot(n,x) = d 平面法线
         /// </summary>
         public LVector3 n;
 
