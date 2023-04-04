@@ -140,7 +140,7 @@ namespace Lockstep.Collision2D {
             }
 
             Profiler.EndSample();
-            ////0.32~0.42ms
+            ////0.32~0.42ms  碰撞检测
             Profiler.BeginSample("CheckCollision");
             foreach (var val in tempLst) {
                 val._isMoved = false;
@@ -148,6 +148,7 @@ namespace Lockstep.Collision2D {
                 var targetLayers = InterestingMasks[val.LayerType];
                 foreach (var layerType in targetLayers) {
                     var boundsTree = GetBoundTree(layerType);
+                    //检测四叉树里的节点区域中的其他对象跟目标对象的包围盒是否发生碰撞  从根节点开始检测
                     boundsTree.CheckCollision(val, bound);
                 }
             }
@@ -165,7 +166,7 @@ namespace Lockstep.Collision2D {
                 if (a == null || b == null) {
                     continue;
                 }
-
+                //CollisionHelper.CheckCollision 碰撞检测的方法实现 TODO?
                 bool isCollided = CollisionHelper.CheckCollision
                     (a.Prefab, a.Transform2D, b.Prefab, b.Transform2D);
                 if (isCollided) {
@@ -200,15 +201,18 @@ namespace Lockstep.Collision2D {
             }
         }
 
+        //发生碰撞后的通知
         public void NotifyCollisionEvent(ColliderProxy a, ColliderProxy b, ECollisionEvent type){
             funcGlobalOnTriggerEvent?.Invoke(a, b, type);
 
             if (!a.IsStatic) {
+                //碰撞回调
                 a.OnTriggerEvent?.Invoke(b, type);
                 //TriggerEvent(a, b, type);
             }
 
             if (!b.IsStatic) {
+                //碰撞回调
                 b.OnTriggerEvent?.Invoke(a, type);
                 //TriggerEvent(b, a, type);
             }

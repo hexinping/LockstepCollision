@@ -192,6 +192,7 @@ namespace Lockstep.Collision2D {
             return rootNode.IsColliding(obj, ref checkBounds);
         }
 
+        //检测四叉树里的节点区域中的其他对象跟目标对象的包围盒是否发生碰撞
         public void CheckCollision(ColliderProxy obj, LRect checkBounds){
             rootNode.CheckCollision(obj, ref checkBounds);
         }

@@ -4,6 +4,8 @@ namespace Lockstep.Collision2D {
 
 
     public partial class CollisionHelper {
+        
+        //不同碰撞类型之间发生碰撞的碰撞类型枚举
         public enum ECollisionPair {
             Seg_Seg         = 0x00,
             Seg_Ray         = 0x01,
@@ -69,12 +71,26 @@ namespace Lockstep.Collision2D {
             if (id > _dealFuncs.Length)
                 return false;
             var enumType = (ECollisionPair)id ;
-            var func = _dealFuncs[id];
+            var func = _dealFuncs[id]; //一堆碰撞检测函数
             if(func!= null){
                 return   func(col1, trans1, col2,trans2);
             }
             return false;
         }
+        
+        /*
+         *
+         * void CreatePrefab(CBaseShape collider){
+                var prefab = new ColliderPrefab();
+                //最后碰撞检测是使用 ColliderPart
+                prefab.parts.Add(new ColliderPart() {
+                    transform = new CTransform2D(LVector2.zero),
+                    collider = collider
+                });
+                prefabs.Add(prefab);
+            }
+         * 
+         */
         public static bool CheckCollision(ColliderPrefab col1, CTransform2D trans1, ColliderPrefab col2,
             CTransform2D trans2){
             foreach (var part1 in col1.parts) {

@@ -66,6 +66,7 @@ namespace Lockstep.Collision2D {
             }
 
             if (mat != null) {
+                //碰撞发生的表現
                 mat.color = hasCollided ? rawColor * 0.2f : rawColor;
                 if (IsReplaceNullMat) {
                     render.material = hasCollided ? null : rawmat;

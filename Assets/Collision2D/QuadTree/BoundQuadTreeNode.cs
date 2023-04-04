@@ -202,13 +202,16 @@ namespace Lockstep.Collision2D {
                 return;
             }
 
-            // Check against any objects in this node
+            // Check against any objects in this node  检查该节点中的任何对象
             for (int i = 0; i < objects.Count; i++) {
                 var o = objects[i];
+                //BoundsQuadTree.FuncCanCollide 是代表是否需要去检测的过滤函数，由外部定义
+                //o.Bounds.Overlaps(checkBounds) 是否发生碰撞，AABB包围盒检测??? TODO
                 if (!ReferenceEquals(o.Obj, obj)
                     && BoundsQuadTree.FuncCanCollide(o.Obj, obj)
                     && o.Bounds.Overlaps(checkBounds)
                 ) {
+                    //发生碰撞时的业务回调
                     BoundsQuadTree.funcOnCollide(obj, o.Obj);
                 }
             }

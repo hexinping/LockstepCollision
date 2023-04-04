@@ -50,6 +50,7 @@ namespace Lockstep.Collision2D {
 
             void CreatePrefab(CBaseShape collider){
                 var prefab = new ColliderPrefab();
+                //最后碰撞检测是使用 ColliderPart
                 prefab.parts.Add(new ColliderPart() {
                     transform = new CTransform2D(LVector2.zero),
                     collider = collider
