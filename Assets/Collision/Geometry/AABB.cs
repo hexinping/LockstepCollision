@@ -120,19 +120,22 @@ namespace Lockstep.Collision {
             return shape.TestWith(this);
         }
 
-
+        //AABB 和 球
         public override bool TestWith(Sphere sphere){
             return Utils.TestSphereAABB(sphere, this);
         }
 
+        //AABB 和 AABB
         public override bool TestWith(AABB aabb){
             return Utils.TestAABBAABB(aabb, this);
         }
 
+        //AABB 和 胶囊体
         public override bool TestWith(Capsule capsule){
             return Utils.TestAABBCapsule(this, capsule);
         }
 
+        //AABB 和 OBB
         public override bool TestWith(OBB obb){
             return Utils.TestOBBOBB(obb, this.ToOBB());
         }

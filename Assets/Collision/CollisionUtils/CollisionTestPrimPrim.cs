@@ -4,8 +4,8 @@ using Point2D = Lockstep.Math.LVector2;
 
 namespace Lockstep.Collision
 {
-    /// <summary>
-    /// Collision Query 
+    /// <summary> 
+    /// Collision Query
     /// </summary>
     public static partial class Utils
     {

@@ -13,12 +13,12 @@ namespace Lockstep.Collision
         public override EColType ColType{get { return EColType.Sphere;}}
 
         /// <summary>
-        /// // Sphere center
+        /// // Sphere center  球心
         /// </summary>
         public LVector3 c;
 
         /// <summary>
-        /// Sphere radius
+        /// Sphere radius 半径
         /// </summary>
         public LFloat r;
         

@@ -37,21 +37,22 @@ namespace Lockstep.Collision {
 
         private LVector3 _hDir;
 
+        //轴方向
         public LVector3 hDir {
             get => _hDir;
             set {
                 _hDir = value;
-                _hLen = value.magnitude;
+                _hLen = value.magnitude; 
             }
         }
 
         /// <summary>
-        /// Center
+        /// Center  中心
         /// </summary>
         public LVector3 c;
 
         /// <summary>
-        /// Radius
+        /// Radius 半径
         /// </summary>
         public LFloat r;
 

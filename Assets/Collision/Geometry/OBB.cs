@@ -19,17 +19,17 @@ namespace Lockstep.Collision
         }
 
         /// <summary>
-        /// OBB center point
+        /// OBB center point  中心点
         /// </summary>
         public LVector3 c;
 
         /// <summary>
-        /// Local x-, y-, and z-axes
+        /// Local x-, y-, and z-axes  轴向
         /// </summary>
         public LAxis3D u;
 
         /// <summary>
-        /// Positive halfwidth extents of OBB along each axis
+        /// Positive halfwidth extents of OBB along each axis OBB 沿每个轴的正半宽范围
         /// </summary>
         public LVector3 e;
         

@@ -108,7 +108,7 @@ public class TestCollision3D : MonoBehaviour {
         return proxy;
     }
 
-
+    //添加3D碰撞体数据
     public void AddTestCollider(DebugUnityColliderProxy proxy, GameObject obj, PrimitiveType type){
         switch (type) {
             case PrimitiveType.Cube: {
