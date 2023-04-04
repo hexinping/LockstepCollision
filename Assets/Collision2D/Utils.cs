@@ -260,6 +260,11 @@ namespace Lockstep.Collision2D {
             return true;
         }
 
+        // private static bool CheckCircle_OBB     (CCircle  col1,    COBB      col2,Transform2D trans1,Transform2D trans2){    
+        //     return Utils.TestCircleOBB(
+        //         trans1.pos, col1.radius, 
+        //         trans2.pos, col2.radius, col2.size,col2.up);} 
+        
         public static bool TestCircleOBB(LVector2 posA, LFloat rA, LVector2 posB, LFloat rB, LVector2 sizeB,
             LVector2 up){
             var diff = posA - posB;
@@ -279,6 +284,14 @@ namespace Lockstep.Collision2D {
             return x * x + y * y < radius * radius;
         }
 
+        
+        
+        // private static bool CheckAABB_OBB(CAABB col1, COBB col2, Transform2D trans1, Transform2D trans2){
+        //     return Utils.TestAABBOBB(
+        //         trans1.pos, col1.radius, col1.size,
+        //         trans2.pos, col2.radius, col2.size,col2.up);
+        // }  
+        
         public static bool TestAABBOBB(LVector2 posA, LFloat rA, LVector2 sizeA, LVector2 posB, LFloat rB,
             LVector2 sizeB,
             LVector2 upB){
@@ -390,6 +403,13 @@ namespace Lockstep.Collision2D {
             return diff.sqrMagnitude <= allRadius * allRadius;
         }
 
+        // private static bool CheckCircle_AABB    (CCircle  col1,    CAABB     col2,Transform2D trans1,Transform2D trans2){     
+        //     return Utils.TestCircleAABB(
+        //         trans1.pos, col1.radius, 
+        //         trans2.pos, col2.radius, col2.size);
+        //     
+        // }   
+        
         public static bool TestCircleAABB(LVector2 posA, LFloat rA, LVector2 posB, LFloat rB, LVector2 sizeB){
             var diff = posA - posB;
             var allRadius = rA + rB;

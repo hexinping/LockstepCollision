@@ -100,19 +100,21 @@ namespace Lockstep.Collision2D {
             switch (type) {
                 case EShape2D.Circle: {
                     var colInfo = (CCircle) prefab.collider;
-                    //修改localScale
+                    //修改localScale来标识碰撞范围
                     obj.transform.localScale =
                         new Vector3(colInfo.radius.ToFloat() * 2, 1, colInfo.radius.ToFloat() * 2);
                     break;
                 }
                 case EShape2D.AABB: {
                     var colInfo = (CAABB) prefab.collider;
+                    //修改localScale来标识碰撞范围
                     obj.transform.localScale =
                         new Vector3(colInfo.size.x.ToFloat() * 2, 1, colInfo.size.y.ToFloat() * 2);
                     break;
                 }
                 case EShape2D.OBB: {
                     var colInfo = (COBB) prefab.collider;
+                    //修改localScale来标识碰撞范围
                     obj.transform.localScale =
                         new Vector3(colInfo.size.x.ToFloat() * 2, 1, colInfo.size.y.ToFloat() * 2);
                     break;
